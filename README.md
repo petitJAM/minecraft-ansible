@@ -9,7 +9,7 @@ Stealing everything from here: https://github.com/chadgeary/minecraft
 ## Install Ansible & Git
 
 ```sh
-sudo apt update && sudo apt install ansible git
+sudo apt update && sudo apt install -y ansible git
 ```
 
 ## Deploy
