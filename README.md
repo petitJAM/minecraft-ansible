@@ -15,7 +15,7 @@ sudo apt update && sudo apt install ansible git
 ## Deploy
 
 ```sh
-git clone https://github.com/chadgeary/minecraft && cd minecraft
+git clone https://github.com/petitJAM/minecraft-ansible && cd minecraft-ansible
 
 ansible-playbook minecraft.yml --extra-vars "target=localhost"
 ```
