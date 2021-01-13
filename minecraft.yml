@@ -22,21 +22,21 @@
         mode: '0700'
         owner: minecraft
         group: minecraft
-        with_items:
-          - /opt/minecraft
-          - /opt/minecraft/backups
-          - /opt/minecraft/server
-          - /opt/minecraft/tmp
+      with_items:
+        - /opt/minecraft
+        - /opt/minecraft/backups
+        - /opt/minecraft/server
+        - /opt/minecraft/tmp
 
     - name: determine if jar downloaded
       stat:
         path: /opt/minecraft/server/server.jar
-        register: mc_jar
+      register: mc_jar
 
     - name: set mc_update = False when not defined
       set_fact:
         mc_update: False
-        when: mc_update is not defined
+      when: mc_update is not defined
 
     - name: get jar download page if not downloaded or mc_update = True
       get_url:
@@ -45,7 +45,7 @@
         mode: '0444'
         owner: minecraft
         group: minecraft
-        when: mc_jar.stat.exists == False or mc_update
+      when: mc_jar.stat.exists == False or mc_update
 
     - name: determine jar url
       shell: awk -F '"' '/\.jar/ {print $2; exit}' /opt/minecraft/tmp/mc_jar_url.html
@@ -59,19 +59,19 @@
         mode: '0444'
         owner: minecraft
         group: minecraft
-        when: mc_jar.stat.exists == False or mc_update
+      when: mc_jar.stat.exists == False or mc_update
 
     - name: determine if eula exists
       stat:
         path: /opt/minecraft/server/eula.txt
-        register: mc_eula_file
+      register: mc_eula_file
 
     - name: run jar when eula not exists (max 60 seconds)
       shell:
         chdir: /opt/minecraft/server/
         cmd: timeout 60 java -Xmx256M -Xms256M -jar server.jar nogui
         ignore_errors: yes
-        when: mc_eula_file.stat.exists == False
+      when: mc_eula_file.stat.exists == False
 
     - name: agree to eula
       lineinfile:
@@ -103,13 +103,13 @@
         enabled: yes
         daemon_reload: yes
         name: minecraft
-        register: mc_started
+      register: mc_started
 
     - name: restart minecraft service if not started previously or mc_update
       systemd:
         state: restarted
         name: minecraft
-        when: mc_started.changed or mc_update
+      when: mc_started.changed or mc_update
 
     - name: backup script
       copy:
