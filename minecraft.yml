@@ -70,7 +70,7 @@
       shell:
         chdir: /opt/minecraft/server/
         cmd: timeout 60 java -Xmx256M -Xms256M -jar server.jar nogui
-        ignore_errors: yes
+      ignore_errors: yes
       when: mc_eula_file.stat.exists == False
 
     - name: agree to eula
