@@ -6,23 +6,23 @@ Stealing everything from here: https://github.com/chadgeary/minecraft
 
 # Setup
 
-## Install Ansible & Git
+## Install Ansible
 
 ```sh
-sudo apt update && sudo apt install -y ansible git
+sudo apt update && sudo apt install -y ansible
 ```
 
 ## Deploy
 
-```sh
-git clone https://github.com/petitJAM/minecraft-ansible && cd minecraft-ansible
+Make sure `host_vars/aws` has the correct server info and then run:
 
-ansible-playbook minecraft.yml --extra-vars "target=localhost"
+```sh
+ansible-playbook -i hosts minecraft.yml
 ```
 
 # Maintenance
 
 Update and restart service:
 ```
-ansible-playbook minecraft.yml --extra-vars "target=localhost mc_update=True"
+ansible-playbook -i hosts minecraft.yml --extra-vars "mc_update=True"
 ```
