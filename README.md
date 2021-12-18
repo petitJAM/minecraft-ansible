@@ -26,3 +26,15 @@ Update and restart service:
 ```
 ansible-playbook -i hosts minecraft.yml --extra-vars "mc_update=True"
 ```
+
+# Notes
+
+The `get_url` ansible task isn't working for some reason. It seems like the 
+Minecraft download page is blocking script access? I can instead go to the page 
+in a browser and copy the direct download link manually. Then run the following
+on the server:
+```sh
+sudo curl <url> --output /opt/minecraft/server/server.jar
+```
+
+Then run the deploy command above.
