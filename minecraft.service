@@ -10,7 +10,7 @@ ProtectSystem=full
 PrivateDevices=true
 NoNewPrivileges=true
 WorkingDirectory=/opt/minecraft/server
-ExecStart=/usr/bin/java -Xmx512M -Xms512M -jar server.jar nogui
+ExecStart=/usr/bin/java -Xmx3G -Xms3G -jar server.jar nogui
 
 [Install]
 WantedBy=multi-user.target
